@@ -8,14 +8,14 @@ import (
 
 //If else
 
-// func main() {
-// 	num := 11
-// 	if num%2 == 0 { //checks if number is even
-// 		fmt.Println("the number", num, "is even")
-// 	} else {
-// 		fmt.Println("the number", num, "is odd")
-// 	}
-// }
+func main() {
+	num := 11
+	if num%2 == 0 { //checks if number is even
+		fmt.Println("the number", num, "is even")
+	} else {
+		fmt.Println("the number", num, "is odd")
+	}
+}
 
 //=========================================
 
@@ -34,12 +34,12 @@ import (
 
 //=========================================
 
-//with if assignment
+// //with if assignment
 
-func main() {
-	if num := 10; num%2 == 0 { //checks if number is even
-		fmt.Println(num, "is even")
-	} else {
-		fmt.Println(num, "is odd")
-	}
-}
+// func main() {
+// 	if num := 10; num%2 == 0 { //checks if number is even
+// 		fmt.Println(num, "is even")
+// 	} else {
+// 		fmt.Println(num, "is odd")
+// 	}
+// }

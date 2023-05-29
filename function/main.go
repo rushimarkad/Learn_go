@@ -14,11 +14,11 @@ func calculateBill(price int, no int) int {
 // 	return totalPrice
 // }
 
-// func main() {
-// 	price, no := 90, 6
-// 	totalPrice := calculateBill(price, no)
-// 	fmt.Println("Total price is", totalPrice)
-// }
+func main() {
+	price, no := 90, 6
+	totalPrice := calculateBill(price, no)
+	fmt.Println("Total price is", totalPrice)
+}
 
 //===========================================
 
@@ -42,12 +42,13 @@ func calculateBill(price int, no int) int {
 //==============================================
 
 // Blank Identifier
-func rectProps(length, width float64) (float64, float64) {
-	var area = length * width
-	var perimeter = (length + width) * 2
-	return area, perimeter
-}
-func main() {
-	area, _ := rectProps(10.8, 5.6) // perimeter is discarded
-	fmt.Printf("Area %f ", area)
-}
+
+// func rectProps(length, width float64) (float64, float64) {
+// 	var area = length * width
+// 	var perimeter = (length + width) * 2
+// 	return area, perimeter
+// }
+// func main() {
+// 	area, _ := rectProps(10.8, 5.6) // perimeter is discarded
+// 	fmt.Printf("Area %f ", area)
+// }

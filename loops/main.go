@@ -8,11 +8,11 @@ import (
 
 // for loop
 
-// func main() {
-// 	for i := 1; i <= 10; i++ {
-// 		fmt.Printf(" %d", i)
-// 	}
-// }
+func main() {
+	for i := 1; i <= 10; i++ {
+		fmt.Printf(" %d", i)
+	}
+}
 
 // ======================================
 
@@ -67,12 +67,12 @@ import (
 
 //while loop can be written as
 
-func main() {
-	i := 0
-	for i <= 10 { //semicolons are ommitted and only condition is present
-		fmt.Printf("%d ", i)
-		i += 2
-	}
-}
+// func main() {
+// 	i := 0
+// 	for i <= 10 { //semicolons are ommitted and only condition is present
+// 		fmt.Printf("%d ", i)
+// 		i += 2
+// 	}
+// }
 
 //=========================================

@@ -8,7 +8,7 @@ type Person struct {
 	int
 }
 
-// named structure
+// named field structure
 type Employee struct {
 	firstName, lastName string
 	age, salary         int
@@ -52,7 +52,7 @@ func main() {
 	fmt.Println("Employee 1\n", emp1)
 	fmt.Println("\nEmployee 2\n", emp2)
 
-	//creating anonymous structure
+	//creating anonymous structure i.e with no type
 	emp3 := struct {
 		firstName, lastName string
 		age, salary         int
@@ -81,6 +81,7 @@ func main() {
 	fmt.Println("Age:", emp6.age)
 	fmt.Printf("Salary: $%d\n", emp6.salary)
 
+	//assign value to struct
 	var emp7 Employee
 	emp7.firstName = "Jack"
 	emp7.lastName = "Adams"

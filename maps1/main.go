@@ -64,8 +64,7 @@ func main() {
 	fmt.Println("\nLength of map:-")
 	fmt.Println("length of personSalary3 is", len(personSalary3))
 
-	/*Maps are reference types. When a map is assigned to another,
-	they point to the same internal datastructure.
+	/*Maps are reference types.
 	Changes made to one map will be reflected in the other
 	*/
 	fmt.Println("\nMaps are reference type:-")
