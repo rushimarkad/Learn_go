@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// Struct to store details of users
 type details struct {
 	name    string
 	address string
@@ -16,6 +17,12 @@ type details struct {
 var m = make(map[int]details)
 
 var id = 0
+
+// Check whether given id is present or not
+func isIdPresent(id int) bool {
+	_, ok := m[id]
+	return ok
+}
 
 func addNew(id int) {
 	var d details
@@ -31,34 +38,46 @@ func addNew(id int) {
 	fmt.Print("Enter pincode: ")
 	fmt.Scanln(&d.pincode)
 	m[id] = d
-	fmt.Println("Details Saved Successfully !!!\n")
+	fmt.Println("Details Saved with id =", id, "Successfully !!!\n")
 }
 
 func getDetails(id1 int) {
-	if id1 != 0 && len(m) >= id1 {
+	ispresent := isIdPresent(id1)
+	if ispresent {
 		fmt.Println("Details corresponding to this id are:")
 		fmt.Println("Name=", m[id1].name)
 		fmt.Println("Address=", m[id1].address)
 		fmt.Println("Mobile=", m[id1].mobile)
 		fmt.Println("Pincode=", m[id1].pincode)
+		fmt.Println("\n")
 	} else {
-		fmt.Println("Sorry...Id does not exist!")
+		fmt.Println("Sorry...Id", id1, "does not exist !\n")
 	}
 
 }
 
 func del(id1 int) {
-	delete(m, id1)
-	fmt.Println("Details with id ", id1, " is deleted successfully")
+	ispresent := isIdPresent(id1)
+	if ispresent {
+		delete(m, id1)
+		fmt.Println("Details with id ", id1, "is deleted successfully")
+	} else {
+		fmt.Println("Cannot delete because Id", id1, "does not exist !\n")
+	}
+
 }
 
 func show() {
-	for key, value := range m {
-		fmt.Println("id=", key)
-		fmt.Println("Name=", value.name)
-		fmt.Println("Address=", value.address)
-		fmt.Println("Mobile=", value.mobile)
-		fmt.Println("Pincode=", value.pincode)
+	if len(m) == 0 {
+		fmt.Println("Currently directory is empty !\n")
+	} else {
+		for key, value := range m {
+			fmt.Println("id=", key)
+			fmt.Println("Name=", value.name)
+			fmt.Println("Address=", value.address)
+			fmt.Println("Mobile=", value.mobile)
+			fmt.Println("Pincode=", value.pincode)
+		}
 	}
 }
 func main() {
@@ -72,23 +91,28 @@ func main() {
 		fmt.Print("Enter your choice: ")
 		fmt.Scanln(&option)
 
-		switch option {
-		case 1:
-			var id1 int
-			fmt.Print("Enter id to get details: ")
-			fmt.Scanln(&id1)
-			getDetails(id1)
-		case 2:
-			id++
-			addNew(id)
-		case 3:
-			var id1 int
-			fmt.Print("Enter id to delete: ")
-			fmt.Scanln(&id1)
-			del(id1)
-		case 4:
-			show()
+		if option != 0 && option <= 4 {
+			switch option {
+			case 1:
+				var id1 int
+				fmt.Print("Enter id to get details: ")
+				fmt.Scanln(&id1)
+				getDetails(id1)
+			case 2:
+				id++
+				addNew(id)
+			case 3:
+				var id1 int
+				fmt.Print("Enter id to delete: ")
+				fmt.Scanln(&id1)
+				del(id1)
+			case 4:
+				show()
+			}
+		} else {
+			fmt.Println("Invalid choice\n")
 		}
+
 		var ans string
 		fmt.Print("Do you want to continue? (Y/N): ")
 		fmt.Scanln(&ans)
