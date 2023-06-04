@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -27,16 +28,29 @@ func isIdPresent(id int) bool {
 func addNew(id int) {
 	var d details
 	scanner := bufio.NewScanner(os.Stdin)
+
 	fmt.Print("Enter name: ")
 	scanner.Scan()
 	d.name = scanner.Text()
+	err1 := scanner.Err()
+	if err1 != nil {
+		log.Fatal(err1)
+	}
+
 	fmt.Print("Enter address: ")
 	scanner.Scan()
 	d.address = scanner.Text()
+	err2 := scanner.Err()
+	if err2 != nil {
+		log.Fatal(err2)
+	}
+
 	fmt.Print("Enter mobile number: ")
 	fmt.Scanln(&d.mobile)
+
 	fmt.Print("Enter pincode: ")
 	fmt.Scanln(&d.pincode)
+
 	m[id] = d
 	fmt.Println("Details Saved with id =", id, "Successfully !!!\n")
 }
@@ -80,6 +94,7 @@ func show() {
 		}
 	}
 }
+
 func main() {
 	var option int
 	for {
