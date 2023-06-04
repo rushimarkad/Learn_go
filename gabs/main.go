@@ -3,6 +3,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 
 	"github.com/Jeffail/gabs/v2"
@@ -44,7 +46,7 @@ func main() {
 	fmt.Println("Value :", value, "OK :", ok)
 	// value == 40.0, ok == true
 
-	gObj, err := jsonParsed.JSONPointer("/outer/alsoInner/array1/1")
+	gObj, err := jsonParsed.JSONPointer("/outer/alsoInner/array1/1") //parses a JSON pointer path and either returns a *gabs.Container containing the result or an error
 	if err != nil {
 		panic(err)
 	}
@@ -52,6 +54,7 @@ func main() {
 	fmt.Println("Value :", value, "OK :", ok)
 	// value == 40.0, ok == true
 
+	//If path does not exist
 	value, ok = jsonParsed.Path("does.not.exist").Data().(float64)
 	fmt.Println("Value :", value, "OK :", ok)
 	// value == 0.0, ok == false
@@ -71,6 +74,7 @@ func main() {
 	}
 
 	// S is shorthand for Search
+	//ChildrenMap returns a map of all the children of an object element
 	for key, child := range jsonParsed1.S("object").ChildrenMap() {
 		fmt.Printf("key: %v, value: %v\n", key, child.Data().(float64))
 	}
@@ -153,4 +157,32 @@ func main() {
 	//And to serialize a specific segment is as simple as:
 	jsonOutput1 := jsonParsedObj.Search("outer").String()
 	fmt.Println(jsonOutput1)
+
+	//Merge two containers
+	jsonParsed3, _ := gabs.ParseJSON([]byte(`{"outer":{"value1":"one"}}`))
+	jsonParsed5, _ := gabs.ParseJSON([]byte(`{"outer":{"inner":{"value3":"three"}},"outer2":{"value2":"two"}}`))
+	jsonParsed3.Merge(jsonParsed5)
+	fmt.Println(jsonParsed3)
+	// Becomes `{"outer":{"inner":{"value3":"three"},"value1":"one"},"outer2":{"value2":"two"}}`
+
+	///Merge two Arrays
+	jsonParsed6, _ := gabs.ParseJSON([]byte(`{"array":["one"]}`))
+	jsonParsed7, _ := gabs.ParseJSON([]byte(`{"array":["two"]}`))
+	jsonParsed6.Merge(jsonParsed7)
+	fmt.Println(jsonParsed6)
+	// Becomes `{"array":["one", "two"]}`
+
+	//Parsing Numbers
+	sample := []byte(`{"test":{"int":10,"float":6.66}}`)
+	dec := json.NewDecoder(bytes.NewReader(sample))
+	dec.UseNumber()
+
+	val, err := gabs.ParseJSONDecoder(dec)
+	if err != nil {
+		fmt.Errorf("Failed to parse: %v", err)
+		return
+	}
+
+	intValue, err := val.Path("test.int").Data().(json.Number).Int64()
+	fmt.Println(intValue)
 }
