@@ -19,7 +19,7 @@ func main() {
 	jsonObj.SetP("New York", "address.city")
 
 	// Get values from fields
-	age := jsonObj.Path("age").Data().(float64)
+	age := jsonObj.Path("age").Data().(int)
 	name := jsonObj.Path("name").Data().(string)
 	isStudent := jsonObj.Path("isStudent").Data().(bool)
 	email := jsonObj.Path("email").Data().(string)
@@ -35,7 +35,7 @@ func main() {
 	fmt.Println("City:", city)
 
 	// Add a new field
-	jsonObj.Set("AFour", "company.name")
+	jsonObj.SetP("AFour", "company.name")
 
 	// Check if a field exists
 	if jsonObj.Exists("company.name") {
@@ -58,7 +58,7 @@ func main() {
 
 	// Get values from parsed object
 	name = parsedObj.Path("name").Data().(string)
-	company := parsedObj.Path("company.name").Data().(string)
+	company := jsonObj.Path("company.name").Data().(string)
 
 	fmt.Println("Parsed Name:", name)
 	fmt.Println("Parsed Company:", company)
