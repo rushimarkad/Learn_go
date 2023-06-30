@@ -34,7 +34,7 @@ func main() {
 	var value float64
 	var ok bool
 
-	value, ok = jsonParsed.Path("outer.inner.value1").Data().(float64)
+	value, ok = jsonParsed.Path("outer.inner.value1").Data().(float64) //Path() function allows you to navigate the JSON structure and retrieve values for specific fields.
 	fmt.Println("Value :", value, "OK :", ok)
 	// value == 10.0, ok == true
 
@@ -103,6 +103,7 @@ func main() {
 	jsonObj := gabs.New()
 	// or gabs.Wrap(jsonObject) to work on an existing map[string]interface{}
 
+	//to set values for various fields within the JSON object.
 	jsonObj.Set(10, "outer", "inner", "value")
 	jsonObj.SetP(20, "outer.inner.value2")
 	jsonObj.Set(30, "outer", "inner2", "value3")
